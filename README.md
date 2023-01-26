@@ -86,6 +86,9 @@ $ adb pull /userdata/install/lighttrack_demo/out.avi
 
 ---
 
+# Convert onnx2rknn
+refer: convert_model/onnx2rknn.py
+
 # You may encounter build problems, raise an issue.
 
 
