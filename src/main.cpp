@@ -59,8 +59,10 @@ void track(LightTrack *siam_tracker, const char *video_path)
         ret = capture.open(video_path);
 
     // Exit if video not opened.
-    if (!ret)
+    if (!ret) {
         std::cout << "Open cap failed!" << std::endl;
+        return;
+    }
 
     // Read first frame.
     cv::Mat frame;
