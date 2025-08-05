@@ -64,6 +64,10 @@ static std::vector<float> sz_change_fun(std::vector<float> w, std::vector<float>
     {
         for (int j = 0; j < rows; j++)
         {
+            if (sz <= 0.0f) {
+                sz2.push_back(1.0f);  // Default value when sz is zero or negative
+                continue;
+            }
             float t = std::sqrt((w[i * rows + j] + pad[i*rows+j]) * (h[i * rows + j] + pad[i*rows+j])) / sz;
 
             sz2.push_back(std::max(t,(float)1.0/t) );
@@ -116,7 +120,10 @@ LightTrack::LightTrack(const std::string& model_init, const std::string& model_b
 
 LightTrack::~LightTrack()
 {
-    rknn_outputs_release(net_init, 1, zf);
+    // Only release zf outputs if they were successfully allocated
+    if (zf[0].buf != nullptr) {
+        rknn_outputs_release(net_init, 1, zf);
+    }
 
     rknn_destroy(net_init);
     rknn_destroy(net_backbone);
@@ -314,7 +321,7 @@ void LightTrack::update(const cv::Mat &x_crop, float scale_z)
         for (int j=0; j<cols; j++)
         {
             w[i*cols + j] = pred_x2[i*cols + j] - pred_x1[i*cols + j];
-            h[i*rows + j] = pred_y2[i*rows + j] - pred_y1[i*cols + j];
+            h[i*cols + j] = pred_y2[i*cols + j] - pred_y1[i*cols + j];
         }
     }
 
