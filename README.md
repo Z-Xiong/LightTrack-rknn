@@ -1,3 +1,6 @@
+
+</think>
+
 # LightTrack: Finding Lightweight Neural Networks for Object Tracking via One-Shot Architecture Search (rknn)
 
 The official implementation by pytorch:
@@ -26,6 +29,7 @@ $ adb push $PATH_TO_RELEASE/LightTrack /userdata
 $ adb shell
 # in rk shell
 $ cd /userdata
+$ chmod +x LightTrack
 $ ./LightTrack 01.mp4
 ```
 
@@ -90,8 +94,3 @@ $ adb pull /userdata/install/lighttrack_demo/out.avi
 refer: convert_model/onnx2rknn.py
 
 # You may encounter build problems, raise an issue.
-
-
-
-
-
